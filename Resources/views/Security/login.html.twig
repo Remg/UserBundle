@@ -1,0 +1,45 @@
+{% extends 'RemgUserBundle::base.html.twig' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block title %}
+    {{ 'login.title'|trans({}, 'user') }}
+{% endblock title %}
+
+{% block subtitle_container %}{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+        {% if error %}
+            <div class="alert alert-danger">
+                <i class="fa fa-warning"></i> 
+                <strong>{{ error.messageKey|trans(error.messageData, 'security') }}</strong>
+            </div>
+        {% endif %}
+
+        {{ form_widget(form) }}
+
+        <div class="clearfix"></div>
+
+        <div class="row control-group">
+            <div class="col-xs-12 form-group text-center">
+                <button type="submit" name="_submit" class="btn btn-dark btn-login">
+                    {{ 'login.submit'|trans({}, 'user') }}
+                    <i class="fa fa-sign-in"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{ path('user_resetting_request') }}" class="pull-right">
+                    {{ 'login.resetting_link'|trans({}, 'user') }}
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="{{ path('user_registration_register') }}" class="">
+                    {{ 'login.registration_link'|trans({}, 'user') }}
+                </a>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock content %}

@@ -1,0 +1,71 @@
+{% extends 'RemgLayoutBundle:admin:base.html.twig' %}
+
+{% block meta_title %}
+    {{- 'user.index.title'|trans({}, 'admin') -}}
+{% endblock meta_title %}
+
+{% block body %}
+    {# Main content  #}
+    {% embed 'RemgLayoutBundle:admin:widget/panel.html.twig' %}
+        {% block title %}
+            <h1>
+                <i class="fa fa-file-text"></i>
+                {{ 'user.plural'|trans({}, 'admin')|capitalize }}
+                <small>{{ 'index'|trans({}, 'admin') }}</small>
+            </h1>
+        {% endblock title %}
+        
+        {% block content %}
+            {# Advanced search #}
+            {% include 'RemgLayoutBundle:admin:widget/advanced_search.html.twig' with {'form': filter_form} %}
+
+            {# Pagination #}
+            {% include 'RemgLayoutBundle:admin:pagination/pagination.html.twig' with {'pagination': pagination} %}
+
+            {# List #}
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th width="1%">#</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'user.email.label'|trans({}, 'admin'), 'u.email') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'user.enabled.label'|trans({}, 'admin'), 'u.enabled') }}</th>
+                        <th>{{ 'user.roles.label'|trans({}, 'admin') }}</th>
+                        <th width="15%">{{ 'actions'|trans({}, 'admin') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in pagination %}
+                    <tr>
+                        <td><img src="{{ asset(user.profilePicture)|imagine_filter('square_32') }}" class="avatar"></td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.enabled|boolean }}</td>
+                        <td>{{ user.roles|join(', ') }}</td>
+                        <td>
+                            <a href="{{ path('admin_user_show', {'id': user.id}) }}" class="btn btn-primary btn-xs">
+                                <i class="fa fa-folder"></i> {{ 'view'|trans({}, 'admin') }}
+                            </a>
+                            <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="btn btn-warning btn-xs">
+                                <i class="fa fa-edit"></i> {{ 'edit'|trans({}, 'admin') }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {# Pagination #}
+            {% include 'RemgLayoutBundle:admin:pagination/pagination.html.twig' with {'pagination': pagination} %}
+        {% endblock content %}
+    {% endembed %}
+
+    {# Actions #}
+    {% embed 'RemgLayoutBundle:admin:widget/panel.html.twig' %}
+        {% block panel_title %}{% endblock panel_title %}
+        
+        {% block content %}
+            <a href="{{ path('admin_user_new') }}" class="btn btn-success">
+                <i class="fa fa-plus"></i> {{ 'create'|trans({}, 'admin') }}
+            </a>
+        {% endblock content %}
+    {% endembed %}
+{% endblock body %}

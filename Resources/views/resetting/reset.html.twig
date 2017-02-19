@@ -1,0 +1,22 @@
+{% extends 'RemgUserBundle::base.html.twig' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block content %}
+
+    {{ form_start(form) }}
+        <h1>{{ 'resetting.reset.title'|trans({}, 'user') }}</h1>
+
+        {{ form_widget(form) }}
+
+        <br />
+
+        <div>
+            <button type="submit" name="submit" class="btn btn-dark btn-login">
+                {{ 'resetting.reset.submit'|trans({}, 'user') }} <i class="fa fa-sign-in"></i>
+            </button>
+        </div>
+
+    {{ form_end(form) }}
+
+{% endblock content %}

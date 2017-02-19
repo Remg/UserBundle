@@ -1,0 +1,56 @@
+{% extends 'RemgUserBundle:admin:base.html.twig' %}
+
+{% block content %}
+
+    <form action="{{ path('admin_login') }}" method="post">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <h1>ADMIN: {{ 'security.login.title'|trans({}, 'user') }}</h1>
+
+        {% if error %}
+            <div class="alert alert-danger">
+                <i class="fa fa-warning"></i> 
+                <strong>{{ error.messageKey|trans(error.messageData, 'security') }}</strong>
+            </div>
+        {% endif %}
+
+        <div>
+            <input type="text" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'security.login.username'|trans({}, 'user') }}" class="form-control" />
+        </div>
+        <div>
+            <input type="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans({}, 'user') }}" class="form-control" />
+        </div>
+
+        <div>
+            <input type="checkbox" name="_remember_me" />
+            <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'user') }}</label>
+        </div>
+
+        <br />
+        <div>
+            <button type="submit" name="_submit" class="btn btn-dark btn-login">
+                {{ 'security.login.submit'|trans({}, 'user') }} <i class="fa fa-sign-in"></i>
+            </button>
+            <a class="reset_pass" href="{{ path('login') }}">{{ 'resetting.request.link'|trans({}, 'user') }}</a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="separator">
+            <p>
+                {{ 'registration.new_to_site'|trans({}, 'user') }}
+                <a href="{{ path('login') }}">{{ 'registration.register.link'|trans({}, 'user') }}</a>
+            </p>
+
+            <div class="clearfix"></div>
+
+            <br />
+
+            <div>
+                <h1><i class="fa fa-paw"></i> {{ 'title'|trans({}, 'user') }}</h1>
+                <p>{{ 'copyright'|trans({}, 'user') }}</p>
+            </div>
+        </div>
+    </form>
+
+{% endblock content %}

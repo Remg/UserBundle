@@ -1,0 +1,17 @@
+{% form_theme form with [_self, "RemgLayoutBundle:admin:form/form_div_horizontal_layout.html.twig"] %}
+
+{% block _user_profilePicture_file_row %}
+	{{ block('form_widget') }}
+{% endblock %}
+
+{% embed 'RemgLayoutBundle:admin:widget/form.html.twig' with {'form': form} %}
+	{% block body %}
+		{{ form_widget(form) }}
+	{% endblock %}
+
+    {% block buttons %}
+        <button type="submit" class="btn btn-info">
+            <i class="fa fa-save"></i> {{ 'save'|trans }}
+        </button>
+    {% endblock %}
+{% endembed %}

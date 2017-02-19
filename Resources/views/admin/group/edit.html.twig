@@ -1,0 +1,44 @@
+{% extends 'RemgLayoutBundle:admin:base.html.twig' %}
+
+{% block meta_title %}
+    {{- 'group.edit.title'|trans({}, 'admin') -}}
+{% endblock meta_title %}
+
+{% block body %}
+    {# Main content  #}
+    {% embed 'RemgLayoutBundle:admin:widget/panel.html.twig' %}
+        {% block title %}
+            <h1>
+                <i class="fa fa-file-text"></i>
+                {{ 'group.singular'|trans({}, 'admin')|capitalize }}
+                <small>{{ 'edition'|trans({}, 'admin') }}</small>
+            </h1>
+        {% endblock title %}
+        
+        {% block content %}
+            {# Form #}
+            {% include 'RemgUserBundle:admin:group/_form.html.twig' with {'form': edit_form} %}
+        {% endblock content %}
+    {% endembed %}
+
+    {# Actions #}
+    {% embed 'RemgLayoutBundle:admin:widget/panel.html.twig' %}
+        {% block panel_title %}{% endblock panel_title %}
+        
+        {% block content %}
+            <a href="{{ path('admin_group_index') }}" class="btn btn-default">
+                <i class="fa fa-list"></i> {{ 'back_to_index'|trans({}, 'admin') }}
+            </a>
+            <a href="{{ path('admin_group_show', { 'id': group.id }) }}" class="btn btn-primary">
+                <i class="fa fa-eye"></i> {{ 'show'|trans({}, 'admin') }}
+            </a>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">
+                <i class="fa fa-trash"></i> {{ 'delete'|trans({}, 'admin') }}
+            </button>
+        {% endblock content %}
+    {% endembed %}
+{% endblock body %}
+
+{% block modals %}
+    {% include 'RemgUserBundle:admin:group/_delete_modal.html.twig' with {'form': delete_form} %}
+{% endblock modals %}

@@ -1,0 +1,55 @@
+services:
+    # Utils
+    remg_user.token_generator:
+        class: Remg\UserBundle\Util\TokenGenerator
+
+    remg_user.password_updater:
+        class: Remg\UserBundle\Util\PasswordUpdater
+        arguments: ["@security.password_encoder"]
+
+    # Menus
+    remg_user.admin_configure_menu_listener:
+        class: Remg\UserBundle\EventListener\ConfigureMenuListener
+        tags:
+          - { name: kernel.event_listener, event: remg_layout.admin_menu_configure, method: onAdminMenuConfigure }
+
+    # Mailers
+    remg_user.mailer.registration:
+        class: Remg\UserBundle\Mailer\RegistrationMailer
+        arguments:
+            - "@mailer"
+            - "@router"
+            - "@templating"
+
+    # Repositories
+    remg_user.user_repository:
+        class: Remg\UserBundle\Repository\UserRepository
+        factory: ["@doctrine.orm.entity_manager", "getRepository"]
+        arguments:
+            - Remg\UserBundle\Entity\User
+
+    # Event listeners
+    remg_user.user_subscriber:
+        class: Remg\UserBundle\EventListener\UserSubscriber
+        arguments: ["@remg_user.password_updater"]
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
+    # Forms
+    remg_user.form.user_password_request:
+        class: Remg\UserBundle\Form\UserPasswordRequestType
+        arguments: ["@remg_user.user_repository"]
+        tags:
+            - { name: form.type }
+
+    remg_user.group_form:
+        class: Remg\UserBundle\Form\GroupType
+        arguments: ["%security.role_hierarchy.roles%"]
+        tags:
+            - { name: form.type }
+
+    remg_user.profile_picture_form:
+        class: Remg\UserBundle\Form\ProfilePictureType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }

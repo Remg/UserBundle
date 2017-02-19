@@ -1,0 +1,54 @@
+{% extends 'RemgLayoutBundle:admin:base.html.twig' %}
+
+{% block meta_title %}
+    {{- 'group.show.title'|trans({}, 'admin') -}}
+{% endblock meta_title %}
+
+{% block body %}
+    {# Main content  #}
+    {% embed 'RemgLayoutBundle:admin:widget/panel.html.twig' %}
+        {% block title %}
+            <h1>
+                <i class="fa fa-file-text"></i>
+                {{ 'group.singular'|trans({}, 'admin')|capitalize }}
+                <small>{{ 'informations'|trans({}, 'admin') }}</small>
+            </h1>
+        {% endblock title %}
+        
+        {% block content %}
+            <table class="table table-hover table-striped">
+                <tbody>
+                    <tr>
+                        <th width="25%">{{ 'group.id.label'|trans({}, 'admin') }}</th>
+                        <td>{{ group.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'group.username.label'|trans({}, 'admin') }}</th>
+                        <td>{{ group.name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endblock content %}
+    {% endembed %}
+
+    {# Actions #}
+    {% embed 'RemgLayoutBundle:admin:widget/panel.html.twig' %}
+        {% block panel_title %}{% endblock panel_title %}
+        
+        {% block content %}
+            <a href="{{ path('admin_group_index') }}" class="btn btn-default">
+                <i class="fa fa-list"></i> Back to the list
+            </a>
+            <a href="{{ path('admin_group_edit', { 'id': group.id }) }}" class="btn btn-warning">
+                <i class="fa fa-edit"></i> Edit
+            </a>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">
+                <i class="fa fa-trash"></i> Delete
+            </button>
+        {% endblock content %}
+    {% endembed %}
+{% endblock body %}
+
+{% block modals %}
+    {% include 'RemgUserBundle:admin:group/_delete_modal.html.twig' with {'form': delete_form} %}
+{% endblock modals %}

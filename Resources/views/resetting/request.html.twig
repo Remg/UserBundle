@@ -1,0 +1,36 @@
+{% extends 'RemgUserBundle::base.html.twig' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block title %}
+    {{ 'resetting.request.title'|trans({}, 'user') }}
+{% endblock title %}
+
+{% block subtitle %}
+    {{ 'resetting.request.subtitle'|trans({}, 'user') }}
+{% endblock subtitle %}
+
+{% block content %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+        <br />
+
+        <div>
+            <button type="submit" name="submit" class="btn btn-dark btn-login">
+                {{ 'resetting.request.submit'|trans({}, 'user') }} <i class="fa fa-envelope"></i>
+            </button>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="separator">
+            <p>
+                <a href="{{ path('login') }}">
+                    <i class="fa fa-sign-in"></i>
+                    {{ 'security.login.link'|trans({}, 'user') }}
+                </a>
+            </p>
+        </div>
+    {{ form_end(form) }}
+{% endblock content %}

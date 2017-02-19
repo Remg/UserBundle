@@ -1,0 +1,55 @@
+{% extends 'RemgLayoutBundle:admin:base.html.twig' %}
+
+{% block meta_title %}
+    {{- 'user.edit.title'|trans({}, 'admin') -}}
+{% endblock meta_title %}
+
+{% block body %}
+    {# Main content  #}
+    {% embed 'RemgLayoutBundle:admin:widget/panel.html.twig' %}
+        {% block title %}
+            <h1>
+                <i class="fa fa-file-text"></i>
+                {{ 'user.singular'|trans({}, 'admin')|capitalize }}
+                <small>{{ 'edition'|trans({}, 'admin') }}</small>
+            </h1>
+        {% endblock title %}
+        
+        {% block content %}
+            {# Form #}
+            {% include 'RemgUserBundle:admin:user/_form.html.twig' with {'form': edit_form} %}
+        {% endblock content %}
+    {% endembed %}
+
+    {# Actions #}
+    {% embed 'RemgLayoutBundle:admin:widget/panel.html.twig' %}
+        {% block panel_title %}{% endblock panel_title %}
+        
+        {% block content %}
+            <a href="{{ path('admin_user_index') }}" class="btn btn-default">
+                <i class="fa fa-list"></i> {{ 'back_to_index'|trans({}, 'admin') }}
+            </a>
+            <a href="{{ path('admin_user_show', { 'id': user.id }) }}" class="btn btn-primary">
+                <i class="fa fa-eye"></i> {{ 'show'|trans({}, 'admin') }}
+            </a>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">
+                <i class="fa fa-trash"></i> {{ 'delete'|trans({}, 'admin') }}
+            </button>
+        {% endblock content %}
+    {% endembed %}
+{% endblock body %}
+
+{% block modals %}
+    {% include 'RemgUserBundle:admin:user/_delete_modal.html.twig' with {'form': delete_form} %}
+{% endblock modals %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $('#user_profilePicture_remove').on('ifChecked', function(event){
+          $('#user_profilePicture_file').prop('disabled', true);
+        });
+        $('#user_profilePicture_remove').on('ifUnchecked', function(event){
+          $('#user_profilePicture_file').prop('disabled', false);
+        });
+    </script>
+{% endblock %}

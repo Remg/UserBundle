@@ -1,0 +1,39 @@
+{% extends 'RemgUserBundle::base.html.twig' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block content %}
+
+    {{ form_start(form) }}
+        <h1>{{ 'registration.register.title'|trans({}, 'user') }}</h1>
+
+        {{ form_widget(form) }}
+
+        <br />
+
+        <div>
+            <button type="submit" name="submit" class="btn btn-dark btn-login">
+                {{ 'registration.register.submit'|trans({}, 'user') }} <i class="fa fa-sign-in"></i>
+            </button>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="separator">
+            <p>
+                {{ 'registration.already_member'|trans({}, 'user') }}
+                <a href="{{ path('login') }}">{{ 'security.login.link'|trans({}, 'user') }}</a>
+            </p>
+
+            <div class="clearfix"></div>
+
+            <br />
+
+            <div>
+                <h1><i class="fa fa-paw"></i> {{ 'title'|trans({}, 'user') }}</h1>
+                <p>{{ 'copyright'|trans({}, 'user') }}</p>
+            </div>
+        </div>
+    {{ form_end(form) }}
+
+{% endblock content %}

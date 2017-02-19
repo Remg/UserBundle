@@ -1,0 +1,18 @@
+{
+    "name": "remg/user-bundle",
+    "description": "User integration for Symfony3.",
+    "require": {
+        "php": ">=5.5.9",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "remg/layout-bundle": "dev-master"
+    },
+    "require-dev": {
+        "codeclimate/php-test-reporter": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "Remg\\UserBundle\\": "" },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    }
+}

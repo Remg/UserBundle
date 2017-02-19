@@ -1,0 +1,33 @@
+# LOGIN
+login:
+    title: "Connexion"
+    username:
+        label: "Nom d'utilisateur"
+    password:
+        label: "Mot de passe"
+    remember_me:
+        label: "Se souvenir de moi"
+    submit: "Se connecter"
+    registration_link: "Créer mon compte"
+    resetting_link: "Mot de passe oublié"
+
+# REGISTRATION
+registration:
+    new_to_site: "Nouveau sur le site ?"
+    link: "Créer mon compte"
+    submit: "Enregistrer mon compte"
+
+# PASSWORD RESET
+resetting:
+    request:
+        title: "Mot de passe"
+        subtitle: "Réinitialisation"
+
+# USER
+user:
+    username:
+        label: "Nom d'utilisateur"
+        help: "L'adresse e-mail rattachée au compte."
+    password:
+        label: "Mot de passe"
+        help: "Le mot de passe du compte."

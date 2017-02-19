@@ -1,0 +1,11 @@
+user:
+    singular: "Utilisateur"
+    plural: "Utilisateurs"
+
+group:
+    singular: "Groupe"
+    plural: "Groupes"
+    name:
+        label: "Nom"
+    roles:
+        label: "Rôles"

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block meta_title %}{{ 'app.title.default'|trans }}{% endblock meta_title %}</title>
+
+    {% stylesheets filter="cssrewrite,?scssphp" output="css/user.css"
+        'assets/vendor/bootstrap/dist/css/bootstrap.min.css'
+        'assets/vendor/font-awesome/css/font-awesome.min.css'
+        'bundles/remglayout/admin/css/custom.css'
+        'bundles/remglayout/admin/css/layout.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+</head>
+
+<body class="login">
+
+    <div class="login_wrapper">
+        <div class="form login_form">
+
+            <section class="login_content">
+                {% block content %}{% endblock content %}
+            </section>
+
+        </div>
+    </div>
+
+</body>
+</html>

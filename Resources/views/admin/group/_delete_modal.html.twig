@@ -1,0 +1,5 @@
+{% embed 'RemgLayoutBundle:admin:widget/delete_modal.html.twig' with {'form': delete_form} %}
+    {% block body %}
+        <p>{{ 'group.delete.confirmation'|trans }}</p>
+    {% endblock body %}
+{% endembed %}
